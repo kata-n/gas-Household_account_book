@@ -1,6 +1,7 @@
 //CHANNEL_ACCESS_TOKENを設定
 //LINE developerで登録をした、CHANNEL_ACCESS_TOKENを入力する
-var CHANNEL_ACCESS_TOKEN = "channel_access_token"; 
+//var CHANNEL_ACCESS_TOKEN = "channel_access_token"; 
+var CHANNEL_ACCESS_TOKEN = "";
 var line_endpoint = "https://api.line.me/v2/bot/message/reply";
 
 //SpreadSheetの取得
