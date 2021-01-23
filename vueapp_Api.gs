@@ -1,5 +1,10 @@
 const ss = SpreadsheetApp.getActive()
 
 function test () {
-  console.log(ss.getName())
+  insertTemplate('2021-01')
 }
+
+function insertTemplate(yaerMonth) {
+  
+}
+
