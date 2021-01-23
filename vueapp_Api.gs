@@ -5,6 +5,6 @@ function test () {
 }
 
 function insertTemplate(yaerMonth) {
-  
+  const { SOLID_MEDIUM, DOUBLE } = SpreadsheetApp.BorderStyle
 }
 
