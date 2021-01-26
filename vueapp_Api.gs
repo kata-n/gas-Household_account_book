@@ -8,5 +8,6 @@ function insertTemplate(yaerMonth) {
   const { SOLID_MEDIUM, DOUBLE } = SpreadsheetApp.BorderStyle
 
   const sheet = Spreadsheet.insertSheet(yaerMonth, 0) 
+  const [year, month] = yaerMonth.split('-')
 }
 
