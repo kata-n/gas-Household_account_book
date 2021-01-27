@@ -20,5 +20,10 @@ function insertTemplate(yaerMonth) {
    .setValues([['収入：'], ['支出：'], ['収支差：']])
    .setFontWeight('bold')
    .setHorizontalAlignment('right')
+
+  sheet.getRange('B2:B4')
+    .setFormulas([['=SUM(F7:F)'], ['=SUM(G7:G)'], ['=B2-B3']])
+    .setNumberFormat('#,##0')
+
 }
 
