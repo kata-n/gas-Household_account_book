@@ -25,5 +25,18 @@ function insertTemplate(yaerMonth) {
     .setFormulas([['=SUM(F7:F)'], ['=SUM(G7:G)'], ['=B2-B3']])
     .setNumberFormat('#,##0')
 
+  sheet.getRange('A4:B4')
+    .setBorder(true, null, null, null, null, null, 'black', DOUBLE)
+
+  //ヘッダー部分
+  sheet.getRange('A6:H6')
+    .setValues([['id', '日付', 'タイトル', 'カテゴリ', 'タグ', '収入', '支出', 'メモ']])
+    .setFontWeight('bold')
+    .setBorder(null, null, true, null, null, null, 'black', SOLID_MEDIUM)
+
+  sheet.getRange('F7:G')
+    .setNumberFormat('#,##0')
+
+
 }
 
