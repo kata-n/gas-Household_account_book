@@ -37,6 +37,8 @@ function insertTemplate(yaerMonth) {
   sheet.getRange('F7:G')
     .setNumberFormat('#,##0')
 
-
+  // カテゴリ別支出
+  sheet.getRange('J1')
+    .setFormula('=QUERY(B7:H, "select D, sum(G), sum(G) / "&B3&"  where G > 0 group by D order by sum(G) desc label D \'カテゴリ\', sum(G) \'支出\'")')
 }
 
