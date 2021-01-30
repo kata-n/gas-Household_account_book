@@ -40,5 +40,12 @@ function insertTemplate(yaerMonth) {
   // カテゴリ別支出
   sheet.getRange('J1')
     .setFormula('=QUERY(B7:H, "select D, sum(G), sum(G) / "&B3&"  where G > 0 group by D order by sum(G) desc label D \'カテゴリ\', sum(G) \'支出\'")')
+
+  sheet.getRange('J1:L1')
+    .setFontWeight('bold')
+    .setBorder(null, null, true, null, null, null, 'black', SOLID_MEDIUM)
+
+  sheet.getRange('L1')
+    .setFontColor('white')
 }
 
