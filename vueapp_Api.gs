@@ -47,5 +47,15 @@ function insertTemplate(yaerMonth) {
 
   sheet.getRange('L1')
     .setFontColor('white')
+
+  sheet.getRange('k2:K')
+    .setNumberFormat('#,##0')
+
+  sheet.getRange('L2:L')
+   .setNumberFormat('0.0%')
+
+  sheet.setColumnWidth(9,21)
+
+  return sheet
 }
 
