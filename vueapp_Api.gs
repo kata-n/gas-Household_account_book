@@ -1,7 +1,18 @@
 const Spreadsheet = SpreadsheetApp.getActive()
 
 function test () {
-  insertTemplate('2021-01')
+  //insertTemplate('2021-01')//シートを追加する
+  onPost({
+    item: {
+      date: '2021-02-01',
+      title: '支出テスト',
+      category: '食費',
+      tags: 'タグ1,タグ2',
+      income: null,
+      outgo: 3000,
+      memo: 'テスト'
+    }
+  })　
 }
 
 function insertTemplate(yaerMonth) {
