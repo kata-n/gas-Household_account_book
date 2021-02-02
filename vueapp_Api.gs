@@ -15,6 +15,14 @@ function test () {
   })　
 }
 
+function onPost ({ item }) {
+  if(!isValid(item)) {
+    return {
+      error: '正しい形式で入力してください'
+    }
+  }
+}
+
 function insertTemplate(yaerMonth) {
   const { SOLID_MEDIUM, DOUBLE } = SpreadsheetApp.BorderStyle
 
