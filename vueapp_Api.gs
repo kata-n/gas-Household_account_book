@@ -21,6 +21,9 @@ function onPost ({ item }) {
       error: '正しい形式で入力してください'
     }
   }
+  const { date, title, category, tags, income, outgo, memo } = item  
+
+  const yearMonth = date.slice(0, 7)
 }
 
 function insertTemplate(yaerMonth) {
