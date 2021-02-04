@@ -24,6 +24,7 @@ function onPost ({ item }) {
   const { date, title, category, tags, income, outgo, memo } = item  
 
   const yearMonth = date.slice(0, 7)
+  const sheet = Spreadsheet.getRangeByName(yearMonth) || insertTemplate(yearMonth)
 }
 
 function insertTemplate(yaerMonth) {
