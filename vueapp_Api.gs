@@ -25,6 +25,8 @@ function onPost ({ item }) {
 
   const yearMonth = date.slice(0, 7)
   const sheet = Spreadsheet.getRangeByName(yearMonth) || insertTemplate(yearMonth)
+
+  const id = Utilities.getUuid().slice(0, 8)
 }
 
 function insertTemplate(yaerMonth) {
