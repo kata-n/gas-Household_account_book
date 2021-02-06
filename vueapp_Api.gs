@@ -27,6 +27,10 @@ function onPost ({ item }) {
   const sheet = Spreadsheet.getRangeByName(yearMonth) || insertTemplate(yearMonth)
 
   const id = Utilities.getUuid().slice(0, 8)
+  const row = ["'" + id, "'" + date, "'" + title, "'" + category, "'" + tags, income, outgo, "'" + memo]
+  sheet.appendRow(row)
+
+  return { id, date, title, category, tags, income, outgo, memo}
 }
 
 function insertTemplate(yaerMonth) {
@@ -82,5 +86,15 @@ function insertTemplate(yaerMonth) {
   sheet.setColumnWidth(9,21)
 
   return sheet
+}
+
+function isValid (item = {}) {
+  const strKeys = ['date', 'title', 'category', 'tags', 'memo']
+  const keys = [...strKeys, 'income', 'outgo']
+
+  //すべてのキーが存在するか
+  for (const key of strKeys) {
+    if (item[key] === indefined) return false
+  }
 }
 
