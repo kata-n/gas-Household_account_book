@@ -1,7 +1,7 @@
 const Spreadsheet = SpreadsheetApp.getActive()
 
 function test () {
-  //insertTemplate('2021-01')//シートを追加する
+  // insertTemplate('2021-01')//シートを追加する
   onPost({
     item: {
       date: '2021-02-01',
@@ -16,18 +16,21 @@ function test () {
 }
 
 function onPost ({ item }) {
-  if(!isValid(item)) {
+  if (!isValid(item)) {
     return {
       error: '正しい形式で入力してください'
     }
+  }else{
+    console.log("バリデーション通過");    
   }
   const { date, title, category, tags, income, outgo, memo } = item  
 
   const yearMonth = date.slice(0, 7)
   const sheet = Spreadsheet.getRangeByName(yearMonth) || insertTemplate(yearMonth)
 
-  const id = Utilities.getUuid().slice(0, 8)
+  const id = Utilities.getUuid().slice(0, 8)　//IDを生成するメソッドがgoogleにあるのでそれを使っている
   const row = ["'" + id, "'" + date, "'" + title, "'" + category, "'" + tags, income, outgo, "'" + memo]
+  console.log(row)
   sheet.appendRow(row)
 
   return { id, date, title, category, tags, income, outgo, memo}
@@ -43,7 +46,7 @@ function insertTemplate(yaerMonth) {
    .merge()
    .setValue(`${year}年 ${parseInt(month)}月`)
    .setHorizontalAlignment('center')
-  .setBorder(null, null, true, null, null, null, 'black', SOLID_MEDIUM)
+   .setBorder(null, null, true, null, null, null, 'black', SOLID_MEDIUM)
 
   sheet.getRange('A2:A4')
    .setValues([['収入：'], ['支出：'], ['収支差：']])
@@ -96,13 +99,17 @@ function isValid (item = {}) {
   for (const key of keys) {
     if (item[key] === undefined) {
       return false
-    } 
+    } else {
+      // console.log("キーは全部入力されていてOKだわ")
+    }
   }
 
   // 収支以外が文字列になっているか
-  for (const key of keys) {
+  for (const key of strKeys) {
     if (typeof item[key] !== 'string') {
       return false
+    }else {
+      // console.log("収支はOKだわ")
     }
   }
 
@@ -110,23 +117,22 @@ function isValid (item = {}) {
   const dateReg = /^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/
   if (!dateReg.test(item.date)) {
     return false
+  }else {
+    // console.log("日付はOKだわ")
   }
 
   // 収入のどちらかが入力されているか
-  const { income: i, outgo: o} = item
-  if ((i === null && o === null)) {
-    return false
-  }else{
-   if ((i !== null && o !== null)) {
+  const { income: i, outgo: o } = item
+  if ((i === null && o === null) || (i !== null && o !== null)) {
      return false
-   }    
-  }
+   }  else {
+    //  console.log("支出と入金のどちらかに値があります")    
+   }
 
   //入力された収支が数字であるか
   if (i !== null && typeof i !== 'number') return false
   if (o !== null && typeof o !== 'number') return false
 
   return true
-
 }
 
