@@ -96,5 +96,29 @@ function isValid (item = {}) {
   for (const key of strKeys) {
     if (item[key] === indefined) return false
   }
+
+  // 収支以外が文字列になっているか
+  for (const key of keys) {
+    if (typeof item[key] !== 'string') {
+      return false
+    }
+  }
+
+  // 日付のバリデーション
+  const dateReg = /^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/
+  if (!dateReg.test(item.date)) {
+    return false
+  }
+
+  // 収入のどちらかが入力されているか
+  const { income: i, outgo: o} = item
+  if ((i === null && o === null)) {
+    return false
+  }else{
+   if ((i !== null && o !== null)) {
+     return false
+   }    
+  }
+
 }
 
