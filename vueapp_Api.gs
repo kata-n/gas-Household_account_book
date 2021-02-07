@@ -93,8 +93,10 @@ function isValid (item = {}) {
   const keys = [...strKeys, 'income', 'outgo']
 
   //すべてのキーが存在するか
-  for (const key of strKeys) {
-    if (item[key] === indefined) return false
+  for (const key of keys) {
+    if (item[key] === undefined) {
+      return false
+    } 
   }
 
   // 収支以外が文字列になっているか
@@ -119,6 +121,12 @@ function isValid (item = {}) {
      return false
    }    
   }
+
+  //入力された収支が数字であるか
+  if (i !== null && typeof i !== 'number') return false
+  if (o !== null && typeof o !== 'number') return false
+
+  return true
 
 }
 
