@@ -36,6 +36,11 @@ function onPost ({ item }) {
   return { id, date, title, category, tags, income, outgo, memo}
 }
 
+function onGet ({ yearMonth }) {
+  // 1234-01
+  const ymReg = /^[0-9]{4}-(0[1-9]|1[0-2])$/
+}
+
 function insertTemplate(yaerMonth) {
   const { SOLID_MEDIUM, DOUBLE } = SpreadsheetApp.BorderStyle
 
