@@ -39,6 +39,15 @@ function onPost ({ item }) {
 function onGet ({ yearMonth }) {
   // 1234-01
   const ymReg = /^[0-9]{4}-(0[1-9]|1[0-2])$/
+
+  if (!ymReg.test(yearMnth)) {
+    return {
+      error: '正しい形式で入力してください'
+    }
+  }
+
+  const sheet = Spreadsheet.getSheetByName(yearMonth)
+  const lastRow = sheet ? sheet.getLastRow() : 0
 }
 
 function insertTemplate(yaerMonth) {
