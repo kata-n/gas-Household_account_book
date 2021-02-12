@@ -48,6 +48,16 @@ function onGet ({ yearMonth }) {
 
   const sheet = Spreadsheet.getSheetByName(yearMonth)
   const lastRow = sheet ? sheet.getLastRow() : 0
+
+  if (lastRow < 7) {
+    return []
+  }
+
+  const list = sheet.getRange('A7:H' + lastRow).getValues().map(row=>{
+
+  })
+
+  return list
 }
 
 function insertTemplate(yaerMonth) {
