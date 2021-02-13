@@ -54,7 +54,17 @@ function onGet ({ yearMonth }) {
   }
 
   const list = sheet.getRange('A7:H' + lastRow).getValues().map(row=>{
-
+    const [id, date, title, category, tags, income, outgo, memo] = row
+    return {
+      id,
+      date,
+      title,
+      category,
+      tags,
+      income,
+      outgo,
+      memo
+    }
   })
 
   return list
