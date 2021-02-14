@@ -2,17 +2,21 @@ const Spreadsheet = SpreadsheetApp.getActive()
 
 function test () {
   // insertTemplate('2021-01')//シートを追加する
-  onPost({
-    item: {
-      date: '2021-02-01',
-      title: '支出テスト',
-      category: '食費',
-      tags: 'タグ1,タグ2',
-      income: null,
-      outgo: 3000,
-      memo: 'テスト'
-    }
-  })　
+  // onPost({
+  //   item: {
+  //     date: '2021-02-01',
+  //     title: '支出テスト',
+  //     category: '食費',
+  //     tags: 'タグ1,タグ2',
+  //     income: null,
+  //     outgo: 3000,
+  //     memo: 'テスト'
+  //   }
+  // })
+  const result = onDelete({
+    yearMonth: '2021-11'
+  })
+  console.log(result)
 }
 
 function onPost ({ item }) {
@@ -40,7 +44,7 @@ function onGet ({ yearMonth }) {
   // 1234-01
   const ymReg = /^[0-9]{4}-(0[1-9]|1[0-2])$/
 
-  if (!ymReg.test(yearMnth)) {
+  if (!ymReg.test(yearMonth)) {
     return {
       error: '正しい形式で入力してください'
     }
@@ -66,8 +70,27 @@ function onGet ({ yearMonth }) {
       memo
     }
   })
-
   return list
+}
+
+function onDelete ({ yearMonth, id}) {
+  const ymReg = /^[0-9]{4}-(0[1-9]|1[0-2])$/
+  const sheet = Spreadsheet.getSheetByName(yearMonth)
+
+  if (!ymReg.test(yearMonth) || sheet === null) {
+    return {
+      error: "指定のシートは存在しません"
+    }
+  }
+
+  const lastRow = sheet.getLastRow()
+  const index = sheet.getRange('A7:A', lastRow).getValues().flat().findIndex(v => v === id)
+
+  if(index === -1){
+    return {
+      error: '指定のデータは存在しません'
+    }
+  }
 }
 
 function insertTemplate(yaerMonth) {
@@ -125,6 +148,7 @@ function insertTemplate(yaerMonth) {
   return sheet
 }
 
+//バリデーション
 function isValid (item = {}) {
   const strKeys = ['date', 'title', 'category', 'tags', 'memo']
   const keys = [...strKeys, 'income', 'outgo']
