@@ -91,6 +91,11 @@ function onDelete ({ yearMonth, id}) {
       error: '指定のデータは存在しません'
     }
   }
+
+  sheet.deleteRow(index + 7)
+  return {
+    message: '削除しました'
+  }
 }
 
 function insertTemplate(yaerMonth) {
