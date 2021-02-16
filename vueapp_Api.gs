@@ -98,6 +98,10 @@ function onDelete ({ yearMonth, id}) {
   }
 }
 
+function onPut ({ beforeM, item }){
+  
+}
+
 function insertTemplate(yaerMonth) {
   const { SOLID_MEDIUM, DOUBLE } = SpreadsheetApp.BorderStyle
 
