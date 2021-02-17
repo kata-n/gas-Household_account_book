@@ -111,6 +111,17 @@ function onPut ({ beforeM, item }){
     onDelete({ yearMonth: beforeYM, id: item.id})
     return onPost({ item })
   }
+
+  const sheet = Spreadsheet.getSheetByName(yearMonth)
+  if (sheet === null) {
+    return {
+      error: '指定のシートは存在しません'
+    }
+  }
+
+  const id = item.id
+  const lastRow = sheet.getLastRow()
+  const index = sheet.getRange('A7:A' + lastRow).getValues.flat().findIndex(v => v === id)
 }
 
 function insertTemplate(yaerMonth) {
