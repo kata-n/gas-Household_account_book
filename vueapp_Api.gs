@@ -99,7 +99,18 @@ function onDelete ({ yearMonth, id}) {
 }
 
 function onPut ({ beforeM, item }){
-  
+  const ymReg = /^[0-9]{4}-(0[1-9]|1[0-2])$/
+  if (!ymReg.test(beforeM) || !isValid(item)) {
+    return {
+      error: '正しい形式で入力してください'
+    }
+  }
+
+  const yearMonth = item.date.slice(0,7)
+  if (beforeYM !== yearMonth) {
+    onDelete({ yearMonth: beforeYM, id: item.id})
+    return onPost({ item })
+  }
 }
 
 function insertTemplate(yaerMonth) {
