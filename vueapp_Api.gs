@@ -122,6 +122,15 @@ function onPut ({ beforeM, item }){
   const id = item.id
   const lastRow = sheet.getLastRow()
   const index = sheet.getRange('A7:A' + lastRow).getValues.flat().findIndex(v => v === id)
+
+  if (index === -1) {
+    return {
+      error: '指定のデータは存在しません'
+    }
+  }
+
+  const row = index + 7
+
 }
 
 function insertTemplate(yaerMonth) {
