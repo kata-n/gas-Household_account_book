@@ -135,6 +135,8 @@ function onPut ({ beforeM, item }){
   const values = [["'" + date, "'" + title, "'" + category, "'" + tags, income, outgo, "'" + memo]]
   sheet.getRange(`B${row}:H${row}`).setValues(values)
 
+   return { id, date, title, category, tags, income, outgo, memo }
+
 }
 
 function insertTemplate(yaerMonth) {
