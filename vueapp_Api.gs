@@ -130,6 +130,10 @@ function onPut ({ beforeM, item }){
   }
 
   const row = index + 7
+  const { date, title, category, tags, income, outgo, memo } = item
+
+  const values = [["'" + date, "'" + title, "'" + category, "'" + tags, income, outgo, "'" + memo]]
+  sheet.getRange(`B${row}:H${row}`).setValues(values)
 
 }
 
