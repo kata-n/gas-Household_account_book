@@ -2,7 +2,7 @@ const Spreadsheet = SpreadsheetApp.getActive()
 
 function test () {
   // insertTemplate('2021-01')//シートを追加する
-  // onPost({
+  // onPut({
   //   item: {
   //     date: '2021-02-01',
   //     title: '支出テスト',
@@ -135,7 +135,7 @@ function onPut ({ beforeM, item }){
   const values = [["'" + date, "'" + title, "'" + category, "'" + tags, income, outgo, "'" + memo]]
   sheet.getRange(`B${row}:H${row}`).setValues(values)
 
-   return { id, date, title, category, tags, income, outgo, memo }
+  return { id, date, title, category, tags, income, outgo, memo }
 
 }
 
