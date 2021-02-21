@@ -2,21 +2,23 @@ const Spreadsheet = SpreadsheetApp.getActive()
 
 function test () {
   // insertTemplate('2021-01')//シートを追加する
-  // onPut({
-  //   item: {
-  //     date: '2021-02-01',
-  //     title: '支出テスト',
-  //     category: '食費',
-  //     tags: 'タグ1,タグ2',
-  //     income: null,
-  //     outgo: 3000,
-  //     memo: 'テスト'
-  //   }
-  // })
-  const result = onDelete({
-    yearMonth: '2021-11'
+  onPut({
+    beforeYM: '2021-02',
+    item: {
+      id: '4ae11a1a',
+      date: '2021-02-26',
+      title: '更新サンプル',
+      category: '食費',
+      tags: 'タグ1,タグ2',
+      income: null,
+      outgo: 5000,
+      memo: '更新したよ'  
+    }
   })
-  console.log(result)
+  // const result = onDelete({
+  //   yearMonth: '2021-11'
+  // })
+  // console.log(result)
 }
 
 function onPost ({ item }) {
@@ -98,9 +100,9 @@ function onDelete ({ yearMonth, id}) {
   }
 }
 
-function onPut ({ beforeM, item }){
+function onPut ({ beforeYM, item }){
   const ymReg = /^[0-9]{4}-(0[1-9]|1[0-2])$/
-  if (!ymReg.test(beforeM) || !isValid(item)) {
+  if (!ymReg.test(beforeYM) || !isValid(item)) {
     return {
       error: '正しい形式で入力してください'
     }
@@ -121,7 +123,7 @@ function onPut ({ beforeM, item }){
 
   const id = item.id
   const lastRow = sheet.getLastRow()
-  const index = sheet.getRange('A7:A' + lastRow).getValues.flat().findIndex(v => v === id)
+  const index = sheet.getRange('A7:A' + lastRow).getValues().flat().findIndex(v => v === id)
 
   if (index === -1) {
     return {
