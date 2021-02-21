@@ -22,6 +22,29 @@ function doPost (e) {
   }
 
   const { method = '', params = {} } = contents
+
+  let result
+
+  try {
+    switch(method) {
+      case 'POST':
+        result = onPost(params)
+        break
+      case 'GET':
+        result = onGet(params)
+        break
+      case 'PUT':
+        result = inPut(params)
+        break
+      case 'DELETE':
+        result = onDelete(params)
+        break
+      default:
+        result = { error: 'methodを指定してください' }  
+    }
+  } catch (e) {
+
+  }
 }
 
 function test () {
