@@ -9,6 +9,15 @@ function response (content) {
  return res
 }
 
+function doPost (e) {
+  let contents
+  try {
+    contents = JSON.parse(e.postData.contents)
+  } catch (e) {
+    return response({ error: 'JSONの形式が正しくありません'})
+  }
+}
+
 function test () {
   // insertTemplate('2021-01')//シートを追加する
   onPut({
