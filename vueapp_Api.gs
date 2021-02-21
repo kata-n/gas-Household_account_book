@@ -16,6 +16,12 @@ function doPost (e) {
   } catch (e) {
     return response({ error: 'JSONの形式が正しくありません'})
   }
+
+  if( contents.authToken !== authToken) {
+    return response({ error: '認証に失敗しました' })
+  }
+
+  const { method = '', params = {} } = contents
 }
 
 function test () {
