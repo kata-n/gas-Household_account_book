@@ -1,4 +1,13 @@
 const Spreadsheet = SpreadsheetApp.getActive()
+const authToken = PropertiesService.getScriptProperties().getProperty('authToken') || ''
+
+function response (content) {
+ const res = ContentService.createTextOutput()
+ res.setMimeType(ContentService.MimeType.JSON)
+ res.setContent(JSON.stringify(content))
+
+ return res
+}
 
 function test () {
   // insertTemplate('2021-01')//シートを追加する
