@@ -43,7 +43,7 @@ function doPost (e) {
         result = { error: 'methodを指定してください' }  
     }
   } catch (e) {
-
+      result = { error: e }
   }
 }
 
