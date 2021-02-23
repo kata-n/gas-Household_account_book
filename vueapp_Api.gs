@@ -2,11 +2,10 @@ const Spreadsheet = SpreadsheetApp.getActive()
 const authToken = PropertiesService.getScriptProperties().getProperty('authToken') || ''
 
 function response (content) {
- const res = ContentService.createTextOutput()
- res.setMimeType(ContentService.MimeType.JSON)
- res.setContent(JSON.stringify(content))
-
- return res
+  const res = ContentService.createTextOutput()
+  res.setMimeType(ContentService.MimeType.JSON)
+  res.setContent(JSON.stringify(content))
+  return res
 }
 
 function doPost (e) {
@@ -18,7 +17,7 @@ function doPost (e) {
   }
 
   if( contents.authToken !== authToken) {
-    return response({ error: '認証に失敗しました' })
+    return response({ error: '認証に失敗しましたわ' })
   }
 
   const { method = '', params = {} } = contents
@@ -45,27 +44,33 @@ function doPost (e) {
   } catch (e) {
       result = { error: e }
   }
+
+  return response(result)
+
 }
 
 function test () {
   // insertTemplate('2021-01')//シートを追加する
-  onPut({
-    beforeYM: '2021-02',
-    item: {
-      id: '4ae11a1a',
-      date: '2021-02-26',
-      title: '更新サンプル',
-      category: '食費',
-      tags: 'タグ1,タグ2',
-      income: null,
-      outgo: 5000,
-      memo: '更新したよ'  
-    }
-  })
+  // onPut({
+  //   beforeYM: '2021-02',
+  //   item: {
+  //     id: '4ae11a1a',
+  //     date: '2021-02-26',
+  //     title: '更新サンプル',
+  //     category: '食費',
+  //     tags: 'タグ1,タグ2',
+  //     income: null,
+  //     outgo: 5000,
+  //     memo: '更新したよ'  
+  //   }
+  // })
   // const result = onDelete({
   //   yearMonth: '2021-11'
   // })
   // console.log(result)
+  PropertiesService.getScriptProperties().setProperties({
+    authToken: '88638c0c-7519-11eb-9439-0242ac130002'
+  })
 }
 
 function onPost ({ item }) {
